@@ -54,9 +54,6 @@ jobs:
         with:
           fetch-depth: 0 
 
-      - name: Pull latest Docker image
-        run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-
       - name: Log in to DockerHub
         uses: docker/login-action@v3
         with:
@@ -68,11 +65,11 @@ jobs:
           docker context create ${{ env.DOCKER_IMAGE_NAME }}_context --docker host=${{ secrets.DOCKER_HOST_IP }}
           docker context use ${{ env.DOCKER_IMAGE_NAME }}_context
 
-      - name: Stop and remove existing container
+      - name: Stop and Remove Existing Container
         run: |
           docker stop ${{ env.DOCKER_IMAGE_NAME }} || true
           docker rm ${{ env.DOCKER_IMAGE_NAME }} || true
 
-      - name: Run new container
+      - name: Run New Container
         run: |
           docker run -d --name ${{ env.DOCKER_IMAGE_NAME }} -p 5000:5000 ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:latest
