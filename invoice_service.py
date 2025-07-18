@@ -169,11 +169,9 @@ def create_invoice_pdf(invoice_data):
     buffer.seek(0)
     return buffer
 
-def gen_invoice():
+def gen_invoice(data):
     """Generate invoice PDF from JSON data and save to file system"""
     try:
-        # Get JSON data from request
-        data = request.get_json()
         
         if not data:
             return jsonify({"error": "No data provided"}), 400

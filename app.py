@@ -13,8 +13,8 @@ def home():
 @app.route('/gen_invoice', methods=['POST'])
 def generate_invoice():
     """Generate invoice PDF from JSON data and save to file system"""
-    return gen_invoice()
-
+    data = request.get_json()
+    return gen_invoice(data)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
