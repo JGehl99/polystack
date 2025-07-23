@@ -45,7 +45,7 @@ def create_invoice_pdf(invoice_data):
     title_style = ParagraphStyle(
         'CustomTitle',
         parent=styles['Heading1'],
-        fontSize=24,
+        fontSize=18,
         spaceAfter=30,
         alignment=TA_CENTER
     )
@@ -59,7 +59,7 @@ def create_invoice_pdf(invoice_data):
     )
     
     # Title
-    title = Paragraph("INVOICE", title_style)
+    title = Paragraph("PolyStack Invoice", title_style)
     elements.append(title)
     elements.append(Spacer(1, 12))
     
