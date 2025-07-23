@@ -5,32 +5,10 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
-from jinja2 import Template
 import io
 import os
 from datetime import datetime
 
-
-# Jinja2 template for invoice data structure
-INVOICE_TEMPLATE = """
-{
-    "company_name": "{{ company_name }}",
-    "company_address": "{{ company_address }}",
-    "invoice_number": "{{ invoice_number }}",
-    "invoice_date": "{{ invoice_date }}",
-    "due_date": "{{ due_date }}",
-    "customer_name": "{{ customer_name }}",
-    "customer_email": "{{ customer_email }}",
-    "billing_address": "{{ billing_address }}",
-    "shipping_address": "{{ shipping_address }}",
-    "items": {{ items }},
-    "subtotal": {{ subtotal }},
-    "tax_rate": {{ tax_rate }},
-    "tax_amount": {{ tax_amount }},
-    "total": {{ total }},
-    "notes": "{{ notes }}"
-}
-"""
 
 def create_invoice_pdf(invoice_data):
     """Generate PDF invoice from invoice data"""
@@ -175,9 +153,6 @@ def gen_invoice(data):
         
         if not data:
             return jsonify({"error": "No data provided"}), 400
-        
-        # Create Jinja2 template
-        template = Template(INVOICE_TEMPLATE)
         
         # Set defaults for missing fields
         defaults = {
