@@ -219,7 +219,9 @@ def gen_invoice(data):
         os.makedirs(invoices_dir, exist_ok=True)
         
         # Save PDF to file system
-        filename = f"invoice_{invoice_data['invoice_number']}.pdf"
+        # Sanitize the invoice_number to prevent path traversal
+        sanitized_invoice_number = re.sub(r'[^a-zA-Z0-9_-]', '_', invoice_data['invoice_number'])
+        filename = f"invoice_{sanitized_invoice_number}.pdf"
         filepath = os.path.join(invoices_dir, filename)
         
         with open(filepath, 'wb') as f:
