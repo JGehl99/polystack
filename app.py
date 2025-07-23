@@ -14,6 +14,8 @@ def home():
 def generate_invoice():
     """Generate invoice PDF from JSON data and save to file system"""
     data = request.get_json()
+    if data is None:
+        return jsonify({"error": "Invalid or missing JSON data"}), 400
     return gen_invoice(data)
 
 if __name__ == "__main__":
