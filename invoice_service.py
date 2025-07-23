@@ -183,7 +183,7 @@ def gen_invoice(data):
         defaults = {
             'company_name': 'Your Company',
             'company_address': 'Your Address',
-            'invoice_number': f"INV-{datetime.now().strftime('%Y%m%d-%H%M%S')}",
+            'invoice_number': f"INV-{uuid.uuid4()}",
             'invoice_date': datetime.now().strftime('%Y-%m-%d'),
             'due_date': datetime.now().strftime('%Y-%m-%d'),
             'customer_name': 'Customer Name',
